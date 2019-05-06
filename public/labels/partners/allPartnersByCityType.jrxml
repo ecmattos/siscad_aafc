@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2016-04-21T15:39:49 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="labels" columnCount="2" printOrder="Horizontal" pageWidth="612" pageHeight="792" whenNoDataType="BlankPage" columnWidth="284" columnSpacing="22" leftMargin="11" rightMargin="11" topMargin="35" bottomMargin="35" whenResourceMissingType="Empty" uuid="f152551a-cb11-4f72-92a5-6a88775ed39d">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="net.sf.jasperreports.print.create.bookmarks" value="true"/>
+	<property name="com.jaspersoft.studio.unit." value="cm"/>
+	<parameter name="jsp_partner_type_id" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<parameter name="jsp_city_id" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select 
+`partners`.`id`, 
+`partners`.`name` as `partner_name`, 
+`partners`.`address` as `partner_address`, 
+`partners`.`neighborhood` as `partner_neighborhood`, 
+`partners`.`zip_code` as `partner_zip_code`, 
+`partners`.`email` as `partner_email`, 
+`partners`.`phone` as `partner_phone`, 
+`partners`.`mobile` as `partner_mobile`, 
+`partner_types`.`description` as `partner_type_description`, 
+`cities`.`description` as `city_description`, 
+`states`.`code` as `state_code`, 
+`regions`.`code` as `region_code`, 
+`regions`.`description` as `region_description`
+ from 
+ `partners` 
+ inner join `partner_types` on `partners`.`partner_type_id` = `partner_types`.`id` 
+ inner join `cities` on `partners`.`city_id` = `cities`.`id` 
+ inner join `states` on `cities`.`state_id` = `states`.`id` 
+ inner join `regions` on `cities`.`region_id` = `regions`.`id`
+ where 
+(`cities`.`id` =  $P{jsp_city_id}) and
+(`partners`.`partner_type_id` =  $P{jsp_partner_type_id}) and
+(`partners`.`deleted_at` is null) 
+  order by 
+  `partner_name` asc]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="partner_name" class="java.lang.String"/>
+	<field name="partner_address" class="java.lang.String"/>
+	<field name="partner_neighborhood" class="java.lang.String"/>
+	<field name="partner_zip_code" class="java.lang.String"/>
+	<field name="partner_email" class="java.lang.String"/>
+	<field name="partner_phone" class="java.lang.String"/>
+	<field name="partner_mobile" class="java.lang.String"/>
+	<field name="city_description" class="java.lang.String"/>
+	<field name="state_code" class="java.lang.String"/>
+	<field name="region_code" class="java.lang.String"/>
+	<field name="region_description" class="java.lang.String"/>
+	<sortField name="partner_name"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="71">
+			<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="8" y="27" width="273" height="20" uuid="316d6f97-3adb-4d6f-a245-36e8cb07f7e9"/>
+				<textElement verticalAlignment="Top">
+					<font isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{partner_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="35" width="269" height="18" uuid="ecfb00d3-6068-4c67-93a9-e9f0064b7fa3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{partner_address} +  " - " + $F{partner_neighborhood}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="42" width="269" height="21" uuid="8527cd3f-bb59-474c-9719-fb427aeda795"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{city_description} + " / " + $F{state_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="53" width="269" height="18" uuid="8d7e6e9e-b74c-43c0-a67e-a445e44da31a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CEP: " + $F{partner_zip_code}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

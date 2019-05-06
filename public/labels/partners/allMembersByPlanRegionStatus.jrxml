@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2016-04-21T09:35:54 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="labels" columnCount="2" printOrder="Horizontal" pageWidth="612" pageHeight="792" whenNoDataType="BlankPage" columnWidth="288" columnSpacing="14" leftMargin="11" rightMargin="11" topMargin="35" bottomMargin="35" whenResourceMissingType="Empty" uuid="f152551a-cb11-4f72-92a5-6a88775ed39d">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="net.sf.jasperreports.print.create.bookmarks" value="true"/>
+	<property name="com.jaspersoft.studio.unit." value="cm"/>
+	<parameter name="jsp_plan_id" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<parameter name="jsp_member_status_id" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<parameter name="jsp_region_id" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select 
+`members`.`id`, 
+`members`.`code` as `member_code`, 
+`members`.`cpf` as `member_cpf`, 
+`members`.`name` as `member_name`, 
+`members`.`address` as `member_address`, 
+`members`.`neighborhood` as `member_neighborhood`, 
+`members`.`zip_code` as `member_zip_code`, 
+`members`.`email` as `member_email`, 
+`members`.`phone` as `member_phone`, 
+`members`.`mobile` as `member_mobile`, 
+`member_statuses`.`code` as `member_status_code`, 
+`member_statuses`.`description` as `member_status_description`, 
+`cities`.`description` as `city_description`, 
+`states`.`code` as `state_code`, 
+`regions`.`code` as `region_code`, 
+`regions`.`description` as `region_description`, 
+`plans`.`code` as `plan_code`, 
+`plans`.`description` as `plan_description`
+ from 
+ `members` 
+ inner join `cities` on `members`.`city_id` = `cities`.`id` 
+ inner join `states` on `cities`.`state_id` = `states`.`id` 
+ inner join `regions` on `cities`.`region_id` = `regions`.`id` 
+ inner join `plans` on `members`.`plan_id` = `plans`.`id` 
+ inner join `member_statuses` on `members`.`member_status_id` = `member_statuses`.`id` 
+ where 
+(`members`.`plan_id` =  $P{jsp_plan_id}) and
+(`members`.`member_status_id` =  $P{jsp_member_status_id}) and
+(`regions`.`id` =  $P{jsp_region_id}) and
+(`members`.`deleted_at` is null) 
+  order by 
+  `member_name` asc]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="member_code" class="java.lang.Integer"/>
+	<field name="member_cpf" class="java.lang.String"/>
+	<field name="member_name" class="java.lang.String"/>
+	<field name="member_address" class="java.lang.String"/>
+	<field name="member_neighborhood" class="java.lang.String"/>
+	<field name="member_zip_code" class="java.lang.String"/>
+	<field name="member_email" class="java.lang.String"/>
+	<field name="member_phone" class="java.lang.String"/>
+	<field name="member_mobile" class="java.lang.String"/>
+	<field name="member_status_code" class="java.lang.String"/>
+	<field name="member_status_description" class="java.lang.String"/>
+	<field name="city_description" class="java.lang.String"/>
+	<field name="state_code" class="java.lang.String"/>
+	<field name="region_code" class="java.lang.String"/>
+	<field name="region_description" class="java.lang.String"/>
+	<field name="plan_code" class="java.lang.String"/>
+	<field name="plan_description" class="java.lang.String"/>
+	<sortField name="member_name"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="71">
+			<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="7" y="27" width="273" height="20" uuid="92b6d50e-4411-4e8c-9abb-5ce9b93b539a"/>
+				<textElement verticalAlignment="Top">
+					<font isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{member_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="35" width="269" height="18" uuid="5a9e8e7f-8793-43d9-89f2-940b50e87666"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{member_address} +  " - " + $F{member_neighborhood}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="42" width="269" height="21" uuid="20967aaf-ca8b-43c9-9c0c-f1b01844ab7c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{city_description} + " / " + $F{state_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="53" width="269" height="18" uuid="0cdae9cd-8517-4fab-8436-8f0bba2b9eea"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CEP: " + $F{member_zip_code}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

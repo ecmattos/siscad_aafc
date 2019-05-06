@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2016-04-21T14:19:51 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="partners" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f152551a-cb11-4f72-92a5-6a88775ed39d">
+	<property name="net.sf.jasperreports.export.json.schema" value="/home/eduardo/Projetos/Laravel/siscad_aafc/public/reports/members/search_results.json"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SisCad AAFC Localhost"/>
+	<subDataset name="search_results" uuid="6817a268-041b-458b-9fd9-083824637238">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="json Adapter "/>
+		<queryString language="json">
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<parameter name="jsp_partner_type_id" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<parameter name="jsp_region_id" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select 
+`partners`.`id`, 
+`partners`.`name` as `partner_name`, 
+`partners`.`address` as `partner_address`, 
+`partners`.`neighborhood` as `partner_neighborhood`, 
+`partners`.`zip_code` as `partner_zip_code`, 
+`partners`.`email` as `partner_email`, 
+`partners`.`phone` as `partner_phone`, 
+`partners`.`mobile` as `partner_mobile`, 
+`partner_types`.`description` as `partner_type_description`, 
+`cities`.`description` as `city_description`, 
+`states`.`code` as `state_code`, 
+`regions`.`code` as `region_code`, 
+`regions`.`description` as `region_description`
+ from 
+ `partners` 
+ inner join `partner_types` on `partners`.`partner_type_id` = `partner_types`.`id` 
+ inner join `cities` on `partners`.`city_id` = `cities`.`id` 
+ inner join `states` on `cities`.`state_id` = `states`.`id` 
+ inner join `regions` on `cities`.`region_id` = `regions`.`id`
+ where 
+(`partners`.`partner_type_id` =  $P{jsp_partner_type_id}) and
+(`regions`.`id` =  $P{jsp_region_id}) and
+(`partners`.`deleted_at` is null) 
+  order by 
+  `partner_name` asc]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="partner_name" class="java.lang.String"/>
+	<field name="partner_address" class="java.lang.String"/>
+	<field name="partner_neighborhood" class="java.lang.String"/>
+	<field name="partner_zip_code" class="java.lang.String"/>
+	<field name="partner_email" class="java.lang.String"/>
+	<field name="partner_phone" class="java.lang.String"/>
+	<field name="partner_mobile" class="java.lang.String"/>
+	<field name="partner_type_description" class="java.lang.String"/>
+	<field name="city_description" class="java.lang.String"/>
+	<field name="state_code" class="java.lang.String"/>
+	<field name="region_code" class="java.lang.String"/>
+	<field name="region_description" class="java.lang.String"/>
+	<sortField name="partner_name"/>
+	<variable name="partner_name1" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{partner_name}]]></variableExpression>
+	</variable>
+	<variable name="id1" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{id}]]></variableExpression>
+	</variable>
+	<variable name="id2" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{id}]]></variableExpression>
+	</variable>
+	<variable name="id3" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{id}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="75" splitType="Stretch">
+			<image>
+				<reportElement x="-12" y="2" width="328" height="58" uuid="4e8bfa74-d947-4bf8-bbea-712c2b0d1813"/>
+				<imageExpression><![CDATA["/home/eduardo/Projetos/Laravel/siscad_aafc/public/img/AAFF_logomarca_400_065.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="480" y="0" width="320" height="30" uuid="6043c539-5194-4049-93fd-cbd682e359fb"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Relatório de Parceiros]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="190" y="6" width="150" height="14" uuid="4a557fb9-ce2c-4516-859a-231960aa697d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PARCEIROS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="745" y="6" width="54" height="14" uuid="6e71bd9f-c37c-4131-a38a-70100f1ee670"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CELULAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="6" width="198" height="14" uuid="e718faf9-6a2c-4582-a5c3-4320d88da0be"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ENDERECO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="6" width="100" height="14" uuid="494de13e-93b0-4f7a-adb4-e970b4907bc3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CIDADES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="646" y="6" width="44" height="14" uuid="70e8ef38-7dcf-4d6c-a865-302190d7becc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CEP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="-8" y="6" width="18" height="14" uuid="c26710ae-bc6c-49b4-bebf-d39cfbd1eb45"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="690" y="6" width="54" height="14" uuid="857a9a24-c5b1-4310-9af5-81e03d230ab2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FONE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-10" y="22" width="810" height="1" uuid="20ff7033-65ef-4303-b949-098b4fee1836"/>
+			</line>
+			<staticText>
+				<reportElement x="539" y="6" width="106" height="14" uuid="9effdc3b-e27a-40a5-9e5e-d2cb1299891b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BAIRRO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-10" y="20" width="810" height="1" uuid="adeca3f7-e51a-4ac7-9689-989f9d77bed2"/>
+			</line>
+			<staticText>
+				<reportElement x="111" y="6" width="78" height="14" uuid="802f05c6-bb3f-447a-9b7f-e30a30af8b96"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPOS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="190" y="0" width="150" height="15" uuid="2d75270a-0130-4dda-a02b-79348382f2f2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{partner_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="745" y="0" width="52" height="14" uuid="49633c71-681e-4f27-8dcd-29c4c2441bb3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{partner_mobile}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="340" y="-2" width="199" height="17" uuid="f00adfef-7627-46b3-b1fb-f834b5baa8ec"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{partner_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="-8" y="0" width="18" height="14" uuid="68b881e3-8f77-4205-9467-0cd837ee0906"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{region_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="0" width="100" height="14" uuid="e3267bb6-ded0-4182-b5b5-1066079d2613"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{city_description} + "/" + $F{state_code}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-10" y="14" width="810" height="1" uuid="437b0c2a-1897-4b03-adb7-fa82eb361397"/>
+			</line>
+			<textField>
+				<reportElement x="690" y="1" width="55" height="13" uuid="899d0448-b119-40a7-8ece-64e879569712"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{partner_phone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="646" y="1" width="44" height="12" uuid="11e772e4-09e6-4b25-8945-b8fcccc4e52a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{partner_zip_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="539" y="0" width="106" height="14" uuid="e26e5d11-ef36-4a96-86e3-a3bdc3257de4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{partner_neighborhood}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="111" y="0" width="76" height="15" uuid="2462dfbd-aec4-48ab-9421-63a469307f24"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{partner_type_description}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="22" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="780" y="4" width="20" height="16" uuid="d9a6f729-22af-4aab-96fa-c2f8cd23f433"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="d/MM/yyyy hh:mm:ss">
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="-10" y="4" width="187" height="16" uuid="eb568204-65c4-4989-b739-79a935b41a9d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="690" y="4" width="90" height="16" uuid="4fc1c549-7749-4a97-bd03-e829ea829684"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina: " + $V{PAGE_NUMBER} + "  /"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-10" y="3" width="810" height="1" uuid="253fdfda-241c-4c41-a4ca-72675768a914"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="630" y="3" width="170" height="16" uuid="45214be9-f200-4de0-9313-aa06b71a4780"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Total de registros: " + $V{id3}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,23 @@
+{
+    "name": "resultsystems/validation",
+    "description": "Inspired 'KennedyTedesco Validation' - The power of 'Respect Validation' on Laravel.",
+    "keywords": ["validation", "laravel", "respect", "rules"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leandro Henrique Reis",
+            "email": "emtudo@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "respect/validation": "1.0.*",
+        "illuminate/support": "5.4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "ResultSystems\\Validation\\": "src/Validation"
+        }
+    },
+    "minimum-stability": "dev"
+}

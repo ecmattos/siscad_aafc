@@ -1,0 +1,55 @@
+@extends('adminlte::page')
+
+@section('content_header')
+  <h1>EVENTOS</h1>
+    
+  <ol class="breadcrumb">
+    <div class="btn-group-horizontal">
+      	<a href="{!! route('meetings.create') !!}" type="button" class="btn btn-sm btn-success" rel="tooltip" title="Novo"><i class="fa fa-file-o"></i></a>
+      	<a href="{!! route('meetings') !!}" type="button" class="btn btn-sm btn-info" rel="tooltip" title="Pesquisar"><i class="fa fa-search"></i></a>
+	</div>
+  </ol>
+@stop
+
+
+@section('content')
+   	<div class="row">
+        	<div class="col-md-12">
+          		<div class="box box-info">
+		            <div class="box-header with-border">
+  						<h3 class="box-title">ALTERAÇÃO</h3>
+			        </div>
+					
+					{!! Form::model($meeting, ['route' => ['meetings.update', $meeting->id], 'method' => 'put', 'class' => 'form-horizontal', 'role'=>'form']) !!}
+
+					    <div class="box-body">
+						
+								<?php 
+									$form_method = "put";
+
+									$meeting->expenses_members_food = number_format($meeting->expenses_members_food, 2, ".", "");
+									$meeting->expenses_members_accommodation = number_format($meeting->expenses_members_accommodation, 2, ".", "");
+									$meeting->expenses_members_transport = number_format($meeting->expenses_members_transport, 2, ".", "");
+
+									$meeting->expenses_partners_food = number_format($meeting->expenses_partners_food, 2, ".", "");
+									$meeting->expenses_partners_accommodation = number_format($meeting->expenses_partners_accommodation, 2, ".", "");
+									$meeting->expenses_partners_transport = number_format($meeting->expenses_partners_transport, 2, ".", "");
+
+									$meeting->expenses_employees_food = number_format($meeting->expenses_employees_food, 2, ".", "");
+									$meeting->expenses_employees_accommodation = number_format($meeting->expenses_employees_accommodation, 2, ".", "");
+									$meeting->expenses_employees_transport = number_format($meeting->expenses_employees_transport, 2, ".", "");
+								?>
+		    				@include('meetings.form')
+						</div>
+
+						<div class="box-footer">
+						    <label for="submit_buttons" class="col-sm-2 control-label"></label>
+						    <button type="submit" class="btn btn-flat btn-success">Confirmar <i class="fa fa-check"></i></button>
+						    <a href="{{ URL::previous() }}" class="btn btn-flat btn-danger">Cancelar <i class="fa fa-times"></i></a>
+						</div>
+						
+					{!! Form::close() !!}
+				</div>
+			</div>
+	</div>
+@endsection
