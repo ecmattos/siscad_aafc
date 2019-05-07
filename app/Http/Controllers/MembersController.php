@@ -234,10 +234,11 @@ class MembersController extends Controller
      */
     public function show($id)
     {
+        
         $this->authorize('members-show');
 
         $member = $this->memberRepository->findMemberById($id);
-        
+
         $logs = $member->revisionHistory;
         
         return view('members.show', compact('member', 'logs'));

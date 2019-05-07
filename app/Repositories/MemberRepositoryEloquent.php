@@ -109,7 +109,7 @@ class MemberRepositoryEloquent extends BaseRepository implements MemberRepositor
 	public function findMemberById($id)
     {
 		return $this->member
-		->find($id)
+		->whereId($id)
 		->first();
     }
 
