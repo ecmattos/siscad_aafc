@@ -63,7 +63,8 @@
 								   	<td>{{ $meeting->city->description }}/{{ $meeting->city->state->code }}</td>
 								   	<td>{{ $meeting->city->region->description }}</td>
 								   	<td>{{ $meeting->description }}</td>
-										
+										<td>{{ $meeting->meeting_status->description }}</td>
+								   	
 								  </tr>
 							  @endforeach
 							</tbody>
