@@ -85,7 +85,7 @@ class Meeting extends Revisionable
     #    return $this->belongsToMany('SisCad\Entities\Employee', 'meeting_employees', 'meeting_id', 'employee_id'); 
     #}
 
-    #public function partenrs()
+    #public function partners()
     #{
     #    return $this->belongsToMany('SisCad\Entities\Partner', 'meeting_partners', 'meeting_id', 'partner_id'); 
     #}
@@ -100,7 +100,7 @@ class Meeting extends Revisionable
         return $this->belongsToMany(Employee::class); 
     }
 
-    public function partenrs()
+    public function partners()
     {
         return $this->belongsToMany(Partner::class); 
     }

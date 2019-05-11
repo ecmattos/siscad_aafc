@@ -64,7 +64,11 @@
 								   	<td>{{ $meeting->city->region->description }}</td>
 								   	<td>{{ $meeting->description }}</td>
 										<td>{{ $meeting->meeting_status->description }}</td>
-								   	
+								   	<td class="text-right"></td>
+								   	<td class="text-right"></td>
+								   	<td class="text-right">
+										 	<b>{{ number_format(($meeting->expenses_members_food + $meeting->expenses_members_accommodation + $meeting->expenses_members_transport + $meeting->expenses_partners_food + $meeting->expenses_partners_accommodation + $meeting->expenses_partners_transport + $meeting->expenses_employees_food + $meeting->expenses_employees_accommodation + $meeting->expenses_employees_transport), 2,",",".") }}</b>
+										</td>
 								  </tr>
 							  @endforeach
 							</tbody>
