@@ -59,6 +59,7 @@
 				           			{{ $meeting->date->format('d/m/Y') }}
 				        			@endif
 				         		</td>
+								   	<td>{{ $meeting->meeting_type->description }}</td>
 								   	
 								  </tr>
 							  @endforeach
